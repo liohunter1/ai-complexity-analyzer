@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-complexity-analyzer"
+version = "1.0.0"
+description = "AI-powered code complexity analysis for GitHub repositories"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "liohunter1", email = "dev@liohunter.com"}
+]
+keywords = ["ai", "code-analysis", "complexity", "github", "llm"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "langchain>=0.1.0",
+    "langchain-openai>=0.0.5",
+    "langchain-anthropic>=0.1.0",
+    "pydantic>=2.5.0",
+    "requests>=2.31.0",
+    "tiktoken>=0.5.2",
+    "python-dotenv>=1.0.0",
+    "typer>=0.9.0",
+    "rich>=13.7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.12.0",
+    "black>=23.12.0",
+    "ruff>=0.1.9",
+    "mypy>=1.8.0",
+]
+
+[project.scripts]
+complexity-analyzer = "complexity_analyzer.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/liohunter1/ai-complexity-analyzer"
+Repository = "https://github.com/liohunter1/ai-complexity-analyzer"
+Issues = "https://github.com/liohunter1/ai-complexity-analyzer/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["complexity_analyzer*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = []
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
+addopts = "--cov=complexity_analyzer --cov-report=term-missing --cov-report=html"

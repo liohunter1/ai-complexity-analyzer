@@ -30,11 +30,12 @@ class LLMProvider(ABC):
 
 
 class OpenAIProvider(LLMProvider):
-    """OpenAI GPT-4 provider for complexity analysis."""
+    """OpenAI GPT provider for complexity analysis (default via OPENAI_MODEL)."""
     
     def __init__(self, model: str = "gpt-4-turbo-preview", temperature: float = 0.1):
+        chosen_model = model or os.getenv("OPENAI_MODEL", "gpt-5")
         self.llm = ChatOpenAI(
-            model=model,
+            model=chosen_model,
             temperature=temperature,
             api_key=os.getenv("OPENAI_API_KEY")
         )
@@ -163,7 +164,7 @@ class RepositoryAnalyzer:
     def _create_llm_provider(self, provider: str, model: Optional[str]) -> LLMProvider:
         """Factory method for creating LLM providers."""
         if provider == "openai":
-            return OpenAIProvider(model=model or "gpt-4-turbo-preview")
+            return OpenAIProvider(model=model or os.getenv("OPENAI_MODEL", "gpt-5"))
         elif provider == "anthropic":
             return AnthropicProvider(model=model or "claude-3-opus-20240229")
         else:

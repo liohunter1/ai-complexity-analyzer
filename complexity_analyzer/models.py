@@ -2,7 +2,7 @@
 Data models for complexity analysis using Pydantic for validation.
 """
 
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Any
 from pydantic import BaseModel, Field, validator
 from enum import Enum
 
@@ -52,7 +52,7 @@ class ComplexityReport(BaseModel):
     top_file: str = Field(..., description="Most complex file in repository")
     score: float = Field(..., ge=0, le=100, description="Repository-wide complexity score")
     
-    metadata: Dict[str, any] = Field(default_factory=dict)
+    metadata: Dict[str, Any] = Field(default_factory=dict)
     timestamp: str
     
     @validator('top_file')

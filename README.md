@@ -118,14 +118,14 @@ graph TD
 ### Using Docker (Recommended)
 
 ```bash
-docker pull net0hunter/ai-complexity-analyzer:latest
-docker run -e OPENAI_API_KEY=sk-xxx net0hunter/ai-complexity-analyzer https://github.com/owner/repo
+docker pull liohunter1/ai-complexity-analyzer:latest
+docker run -e OPENAI_API_KEY=sk-xxx liohunter1/ai-complexity-analyzer https://github.com/owner/repo
 ```
 
 ### Local Development
 
 ```bash
-git clone https://github.com/NET0HUNTER/ai-complexity-analyzer.git
+git clone https://github.com/liohunter1/ai-complexity-analyzer.git
 cd ai-complexity-analyzer
 pip install -r requirements.txt
 cp .env.example .env  # Add your API keys
